@@ -1,0 +1,8 @@
+package-as: DataStore_Keystones
+
+move-folders:
+ DataStore_Keystones/DataStore_Keystones: DataStore_Keystones
+
+ignore:
+ - LICENCE.md
+ - README.md
