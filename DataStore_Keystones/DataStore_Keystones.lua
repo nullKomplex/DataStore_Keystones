@@ -78,6 +78,7 @@ end
 
 local function ScanHighestKeystone()
     local char = addon.ThisCharacter
+    wipe(char.highestKeystoneThisWeek)
     local maps = C_ChallengeMode.GetMapTable()
     if not maps then return end
     
@@ -105,6 +106,11 @@ end
 -- *** Event Handlers ***
 local function OnPlayerAlive()
 	ScanCurrentKeystoneInfo()
+end
+
+local ignore = true
+local function OnAffixUpdate()
+    if ignore then return end
     ScanHighestKeystone()
 end
 
@@ -241,11 +247,16 @@ function addon:OnInitialize()
 
 	DataStore:SetCharacterBasedMethod("GetCurrentKeystone")
 	DataStore:SetCharacterBasedMethod("GetHighestKeystone")
+    
+    C_Timer.After(5, function() 
+            ignore = false
+            C_MythicPlus.RequestCurrentAffixes() 
+    end)
 end
 
 function addon:OnEnable()
 	addon:RegisterEvent("PLAYER_ALIVE", OnPlayerAlive)
-	addon:RegisterEvent("MYTHIC_PLUS_CURRENT_AFFIX_UPDATE", OnPlayerAlive)
+	addon:RegisterEvent("MYTHIC_PLUS_CURRENT_AFFIX_UPDATE", OnAffixUpdate)
 	addon:RegisterEvent("BAG_UPDATE", OnItemReceived)
     
     ClearExpiredKeystones()
