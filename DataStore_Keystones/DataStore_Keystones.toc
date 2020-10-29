@@ -3,7 +3,7 @@
 ## Notes: Stores information about Mythic+ Keystones
 ## Author: Teelo (US-Jubei'thos)
 ## Version: @project-version@
-## Dependencies: DataStore, DataStore_Containers
+## Dependencies: DataStore, DataStore_Containers, Blizzard_ChallengesUI
 ## OptionalDeps: Ace3
 ## SavedVariables: DataStore_KeystonesDB, DataStore_KeystonesRefDB
 ## X-Category: Interface Enhancements

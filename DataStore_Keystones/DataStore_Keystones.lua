@@ -108,9 +108,7 @@ local function OnPlayerAlive()
 	ScanCurrentKeystoneInfo()
 end
 
-local ignore = true
 local function OnAffixUpdate()
-    if ignore then return end
     ScanHighestKeystone()
 end
 
@@ -248,22 +246,21 @@ function addon:OnInitialize()
 	DataStore:SetCharacterBasedMethod("GetCurrentKeystone")
 	DataStore:SetCharacterBasedMethod("GetHighestKeystone")
     
-    C_Timer.After(5, function() 
-            ignore = false
-            C_MythicPlus.RequestCurrentAffixes() 
-    end)
+    -- Might not be needed. TODO: when I've got more than one character with a keystone, do some testing to see if I even need this
+    -- There is a bug with the functions for getting best weekly/season keys returning data about the previously logged in character
+    LoadAddOn("Blizzard_ChallengesUI")
+    C_MythicPlus.RequestCurrentAffixes()
 end
 
 function addon:OnEnable()
 	addon:RegisterEvent("PLAYER_ALIVE", OnPlayerAlive)
-	addon:RegisterEvent("MYTHIC_PLUS_CURRENT_AFFIX_UPDATE", OnAffixUpdate)
 	addon:RegisterEvent("BAG_UPDATE", OnItemReceived)
-    
+    addon:RegisterEvent("CHALLENGE_MODE_MAPS_UPDATE", OnAffixUpdate)
     ClearExpiredKeystones()
 end
 
 function addon:OnDisable()
 	addon:UnregisterEvent("PLAYER_ALIVE")
-	addon:UnregisterEvent("MYTHIC_PLUS_CURRENT_AFFIX_UPDATE")
+	addon:UnregisterEvent("CHALLENGE_MODE_MAPS_UPDATE")
 	addon:UnregisterEvent("BAG_UPDATE")
 end
