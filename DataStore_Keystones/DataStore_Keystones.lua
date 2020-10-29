@@ -245,11 +245,6 @@ function addon:OnInitialize()
 
 	DataStore:SetCharacterBasedMethod("GetCurrentKeystone")
 	DataStore:SetCharacterBasedMethod("GetHighestKeystone")
-    
-    -- Might not be needed. TODO: when I've got more than one character with a keystone, do some testing to see if I even need this
-    -- There is a bug with the functions for getting best weekly/season keys returning data about the previously logged in character
-    LoadAddOn("Blizzard_ChallengesUI")
-    C_MythicPlus.RequestCurrentAffixes()
 end
 
 function addon:OnEnable()
