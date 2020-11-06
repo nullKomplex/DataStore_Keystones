@@ -36,15 +36,6 @@ local AddonDB_Defaults = {
 	}
 }
 
-local ReferenceDB_Defaults = {
-	global = {
-		['*'] = {							-- "englishClass" like "MAGE", "DRUID" etc..
-			Version = nil,					-- build number under which this class ref was saved
-			Locale = nil,					-- locale under which this class ref was saved
-		},
-	}
-}
-
 -- *** Utility functions ***
 local function GetOption(option)
 	return addon.db.global.Options[option]
@@ -239,7 +230,6 @@ local PublicMethods = {
 
 function addon:OnInitialize()
 	addon.db = LibStub("AceDB-3.0"):New(addonName .. "DB", AddonDB_Defaults)
-	addon.ref = LibStub("AceDB-3.0"):New(addonName .. "RefDB", ReferenceDB_Defaults)
 
 	DataStore:RegisterModule(addonName, addon, PublicMethods)
 

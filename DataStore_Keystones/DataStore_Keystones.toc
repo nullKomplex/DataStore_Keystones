@@ -5,7 +5,7 @@
 ## Version: @project-version@
 ## Dependencies: DataStore, DataStore_Containers
 ## OptionalDeps: Ace3
-## SavedVariables: DataStore_KeystonesDB, DataStore_KeystonesRefDB
+## SavedVariables: DataStore_KeystonesDB
 ## X-Category: Interface Enhancements
 ## X-Embeds: Ace3
 ## X-Curse-Project-ID: 411498
